@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# Tesseract OCR React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This OCR (Optical Character Recognition) React App is specifically designed for recognizing text from Tunisian identity cards. It utilizes Tesseract.js to extract text from images of Tunisian ID cards, allowing users to easily digitize and analyze the textual information present on these cards. By focusing on Tunisian identity cards, the app can be tailored to handle the specific text patterns and structures commonly found on such documents, enhancing the accuracy and efficiency of the OCR process for this specific use case. Users can use this app to quickly extract relevant details like name, date of birth, and other important information from Tunisian ID cards.Let's explore each functionality in detail:
 
-## Available Scripts
+### Functionalities:
 
-In the project directory, you can run:
+1. **Image Upload:**
+   - Users can select an image file containing text by clicking on the file input button.
+   - The selected image will be stored in the state variable `imageFile` for further processing.
 
-### `npm start`
+2. **Text Recognition:**
+   - The OCR process is triggered when the "Recognize Text" button is clicked.
+   - The OCR recognition process is performed using the Tesseract.js library, which is an OCR engine running in the browser.
+   - Tesseract.js supports multiple languages, and in this app, it's set to recognize Arabic text using the language code `'ara'`.
+   - The OCR progress information is logged to the console for monitoring, using the provided `logger` function.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. **Common OCR Error Correction:**
+   - After the OCR process, the recognized text is extracted from the OCR result.
+   - The `correctRecognizedText` function is applied to correct common OCR errors and improve the accuracy of the recognized text.
+   - The corrections applied include:
+     - Replacing common errors specified in the `commonErrors` object with their correct versions.
+     - Removing characters that are not Arabic letters, Arabic numbers, or spaces.
+     - Removing single Arabic digits (composed of a single digit).
+     - Removing single Arabic letters (composed of a single letter).
+     - Adding a line break before each specified term in the text for better readability.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+4. **Displaying Recognized Text:**
+   - The recognized text is displayed on the screen after the OCR process is complete.
+   - The `displayRecognizedText` function formats the recognized text for display, splitting it into lines and adding line breaks between them.
 
-### `npm test`
+5. **Loading Indicator:**
+   - While the OCR process is in progress, a loading indicator is shown to inform the user that recognition is ongoing.
+   - The button for "Recognize Text" is disabled during recognition to prevent multiple recognition requests.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### How to use the OCR App:
 
-### `npm run build`
+1. Clone or download this repository to your local machine.
+2. Install the required dependencies using `npm install`.
+3. Run the app using `npm start` to launch it in your browser.
+4. Once the app is running, select an image containing Arabic text using the "Choose File" button.
+5. Click the "Recognize Text" button to start the OCR process.
+6. The recognized text will be displayed below the image after the OCR process is complete.
+7. If needed, the displayed recognized text will be corrected for common OCR errors.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Please note that this app uses Tesseract.js to perform OCR in the browser, so it may have limitations on the complexity and quality of images it can handle. For best results, use clear images with well-defined Arabic text.
